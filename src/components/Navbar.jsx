@@ -3,7 +3,7 @@ import { BsMoon } from "react-icons/bs";
 
 const Navbar = () => {
 	return (
-		<div className="flex justify-between shadow px-8 md:px-16  py-3">
+		<div className="flex justify-between w-full shadow-lg bg-white  px-8 md:px-16  py-3">
 			<h1 className="font-[800] text-base md:text-2xl">Where in the World?</h1>
 			<div className="flex items-center md:right-16 cursor-pointer">
 				<BsMoon size={14} />{" "}
