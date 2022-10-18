@@ -40,15 +40,31 @@ const HomePage = () => {
 					/>
 				</div>
 				{/* Filter */}
-				{/* TODO: implement fliter */}
-				<div className="flex mt-6 md:mt-0 items-center px-4 py-2 max-w-fit bg-white shadow-lg rounded-sm cursor-pointer">
-					<span className="font-[600] text-sm">Filter by Region</span>
-					<RiArrowDropDownLine size={20} className="ml-4"></RiArrowDropDownLine>
+				<div>
+					<div className="flex mt-6 md:mt-0 peer w-28 sm:w-44 items-center  bg-white shadow-lg p-3 rounded-sm cursor-pointer">
+						<span className="font-[600]  text-sm">Filter by Region</span>
+						<RiArrowDropDownLine
+							size={20}
+							className="ml-4"
+						></RiArrowDropDownLine>
+					</div>
+					{/* Drop down menu */}
+					<div className="absolute  p-3 w-28 sm:w-44  border border-t-black/40 bg-white  hidden peer-hover:block flex-col hover:block">
+						<p className="font-semibold text-md">Africa</p>
+						<p className="font-semibold text-md">America</p>
+						<p className="font-semibold text-md">Asia</p>
+						<p className="font-semibold text-md">Europe</p>
+						<p className="font-semibold text-md">Oceania</p>
+					</div>
 				</div>
 			</div>
 			<div>
 				{/* body */}
-				{loading ? <div> Is Loading....</div> : <CountriesView countiresData={data}/>}
+				{loading ? (
+					<div> Is Loading....</div>
+				) : (
+					<CountriesView countiresData={data} />
+				)}
 			</div>
 		</div>
 	);
