@@ -2,7 +2,7 @@ import React from "react";
 
 const CountriesView = ({ countiresData }) => {
 	return (
-		<div className="grid md:grid-cols-4 pt-14 w-screen pr-10 sm:pr-16 ">
+		<div className="w-full flex flex-col justify-center  sm:grid sm:grid-cols-2  md:grid-cols-3  lg:grid-cols-4 pt-14">
 			{/* Country Component */}
 			{countiresData.map((country) => (
 				<div
