@@ -7,13 +7,31 @@ import CountriesView from "../components/CountriesView";
 const HomePage = () => {
 	const [data, setData] = useState([]);
 	const [loading, setLoading] = useState(null);
+	const [showFilter, setShowFilter] = useState(false);
+	const [countriesData,setCountriesData] = useState([])
 
 	const getAllCountries = async () => {
 		setLoading(true);
 		const resp = await fetch("https://restcountries.com/v3.1/all");
 		const reqResp = await resp.json();
 		setData(reqResp);
+		setCountriesData(reqResp)
 		setLoading(false);
+	};
+
+	//show is loading when filtering
+
+	const filterData = (region) => {
+		if(region !== "All"){
+			const copy = [...countriesData];
+			setData(
+				copy.filter((data) => {
+					return data.region === region;
+				})
+			);
+		}else{
+			setData(countriesData)
+		}
 	};
 
 	useEffect(() => {
@@ -21,15 +39,14 @@ const HomePage = () => {
 	}, []);
 
 	return (
-		// body
-		<div className="px-10  sm:px-16 py-10 bg-very-light-grey-l ">
+		<div className=" bg-very-light-grey-l h-full px-4 sm:px-10 sm:mb-0 mb-4 ">
 			{/* Search and filter row */}
-			<div className=" flex-wrap justify-between md:flex">
+			<div className=" flex-wrap items-center sm:flex sm:justify-between mt-4">
 				{/* Search */}
 				{/* implement search */}
-				<div className="flex items-center shadow-lg h-10 w-full text-sm p-6 bg-white  md:w-[400px] rounded-sm">
+				<div className="bg-white border rounded-md  flex flex-row items-center w-full sm:w-[300px] md:w-[400px] h-12 p-4 shadow-xl">
 					<AiOutlineSearch
-						size={16}
+						size={20}
 						className="text-gray-400 mr-3"
 					></AiOutlineSearch>
 					<input
@@ -41,20 +58,79 @@ const HomePage = () => {
 				</div>
 				{/* Filter */}
 				<div>
-					<div className="flex mt-6 md:mt-0 peer w-28 sm:w-44 items-center  bg-white shadow-lg p-3 rounded-sm cursor-pointer">
-						<span className="font-[600]  text-sm">Filter by Region</span>
+					<button
+						className="relative flex flex-row p-3 rounded-md mt-3  w-44 bg-white border shadow-xl cursor-pointer"
+						onClick={() => {
+							setShowFilter(!showFilter);
+						}}
+					>
+						<span className="font-[600] text-sm ">Filter by Region</span>
 						<RiArrowDropDownLine
 							size={20}
 							className="ml-4"
 						></RiArrowDropDownLine>
-					</div>
+					</button>
 					{/* Drop down menu */}
-					<div className="absolute  p-3 w-28 sm:w-44  border border-t-black/40 bg-white  hidden peer-hover:block flex-col hover:block">
-						<p className="font-semibold text-md">Africa</p>
-						<p className="font-semibold text-md">America</p>
-						<p className="font-semibold text-md">Asia</p>
-						<p className="font-semibold text-md">Europe</p>
-						<p className="font-semibold text-md">Oceania</p>
+					<div
+						className={
+							showFilter
+								? "absolute bg-white w-44 border mt-1 rounded-md p-4 "
+								: "hidden"
+						}
+					><p
+							className="font-semibold text-sm sm:text-base cursor-pointer hover:bg-blue-400 hover:text-white "
+							onClick={() => {
+								filterData("All");
+								setShowFilter(!showFilter);
+							}}
+						>
+							All
+						</p>
+						<p
+							className="font-semibold text-sm sm:text-base cursor-pointer hover:bg-blue-400 hover:text-white "
+							onClick={() => {
+								filterData("Africa");
+								setShowFilter(!showFilter);
+							}}
+						>
+							Africa
+						</p>
+						<p
+							className="font-semibold text-sm sm:text-base cursor-pointer hover:bg-blue-400 hover:text-white "
+							onClick={() => {
+								filterData("Americas");
+								setShowFilter(!showFilter);
+							}}
+						>
+							Americas
+						</p>
+						<p
+							className="font-semibold text-sm sm:text-base cursor-pointer hover:bg-blue-400 hover:text-white "
+							onClick={() => {
+								filterData("Asia");
+								setShowFilter(!showFilter);
+							}}
+						>
+							Asia
+						</p>
+						<p
+							className="font-semibold text-sm sm:text-base cursor-pointer hover:bg-blue-400 hover:text-white "
+							onClick={() => {
+								filterData("Europe");
+								setShowFilter(!showFilter);
+							}}
+						>
+							Europe
+						</p>
+						<p
+							className="font-semibold text-sm sm:text-base cursor-pointer hover:bg-blue-400 hover:text-white "
+							onClick={() => {
+								filterData("Oceania");
+								setShowFilter(!showFilter);
+							}}
+						>
+							Oceania
+						</p>
 					</div>
 				</div>
 			</div>
