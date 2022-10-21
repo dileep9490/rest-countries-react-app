@@ -3,51 +3,52 @@ import React, { useEffect, useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import CountriesView from "../components/CountriesView";
+import Loading from "../components/Loading";
 
 const HomePage = () => {
 	const [data, setData] = useState([]);
 	const [loading, setLoading] = useState(null);
 	const [showFilter, setShowFilter] = useState(false);
-	const [countriesData,setCountriesData] = useState([])
+	const [countriesData, setCountriesData] = useState([]);
 
 	const getAllCountries = async () => {
 		setLoading(true);
 		const resp = await fetch("https://restcountries.com/v3.1/all");
 		const reqResp = await resp.json();
 		setData(reqResp);
-		setCountriesData(reqResp)
+		setCountriesData(reqResp);
 		setLoading(false);
 	};
 
 	//show is loading when filtering
 
 	const filterData = (region) => {
-		if(region !== "All"){
+		if (region !== "All") {
 			const copy = [...countriesData];
 			setData(
 				copy.filter((data) => {
 					return data.region === region;
 				})
 			);
-		}else{
-			setData(countriesData)
+		} else {
+			setData(countriesData);
 		}
 	};
 
-	const nameSearch = (name)=>{
-		if(name.lenght !== 0){
+	const nameSearch = (name) => {
+		if (name.lenght !== 0) {
 			const copy = [...countriesData];
 			setData(
-				copy.filter((item)=>{
-					if(item !== ""){
-						name = name.charAt(0).toUpperCase() + name.slice(1)
-						return item.name.official.includes(`${name}`)
+				copy.filter((item) => {
+					if (item !== "") {
+						name = name.charAt(0).toUpperCase() + name.slice(1);
+						return item.name.official.includes(`${name}`);
 					}
-					return copy
+					return copy;
 				})
-			)
+			);
 		}
-	}
+	};
 
 	useEffect(() => {
 		getAllCountries();
@@ -65,16 +66,16 @@ const HomePage = () => {
 						className="text-gray-400 mr-3"
 					></AiOutlineSearch>
 					<input
-					className="outline-none w-full"
+						className="outline-none w-full"
 						type="text"
 						name=""
 						id=""
 						placeholder="Search for a country.."
-						onChange={(e)=>{
-							if(e.target.value !== ""){
-								nameSearch(e.target.value)
+						onChange={(e) => {
+							if (e.target.value !== "") {
+								nameSearch(e.target.value);
 							}
-						}}	
+						}}
 					/>
 				</div>
 				{/* Filter */}
@@ -98,7 +99,8 @@ const HomePage = () => {
 								? "absolute bg-white w-44 border mt-1 rounded-md p-4 "
 								: "hidden"
 						}
-					><p
+					>
+						<p
 							className="font-semibold text-sm sm:text-base cursor-pointer hover:bg-blue-400 hover:text-white "
 							onClick={() => {
 								filterData("All");
@@ -155,10 +157,10 @@ const HomePage = () => {
 					</div>
 				</div>
 			</div>
-			<div>
+			<div className="h-[628px] bg-very-light-grey-l">
 				{/* body */}
 				{loading ? (
-					<div> Is Loading....</div>
+					<Loading/>
 				) : (
 					<CountriesView countiresData={data} />
 				)}
