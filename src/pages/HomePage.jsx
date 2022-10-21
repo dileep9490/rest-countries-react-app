@@ -34,6 +34,21 @@ const HomePage = () => {
 		}
 	};
 
+	const nameSearch = (name)=>{
+		if(name.lenght !== 0){
+			const copy = [...countriesData];
+			setData(
+				copy.filter((item)=>{
+					if(item !== ""){
+						name = name.charAt(0).toUpperCase() + name.slice(1)
+						return item.name.official.includes(`${name}`)
+					}
+					return copy
+				})
+			)
+		}
+	}
+
 	useEffect(() => {
 		getAllCountries();
 	}, []);
@@ -50,10 +65,16 @@ const HomePage = () => {
 						className="text-gray-400 mr-3"
 					></AiOutlineSearch>
 					<input
+					className="outline-none w-full"
 						type="text"
 						name=""
 						id=""
 						placeholder="Search for a country.."
+						onChange={(e)=>{
+							if(e.target.value !== ""){
+								nameSearch(e.target.value)
+							}
+						}}	
 					/>
 				</div>
 				{/* Filter */}
