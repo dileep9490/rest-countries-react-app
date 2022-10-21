@@ -28,7 +28,6 @@ const CountryPage = () => {
 			</Link>
 
 			<div className="flex flex-col md:flex-row ">
-				{" "}
 				<img
 					className="md:w-[40rem] md:h-[20rem] object-cover"
 					src={data.flags?.svg}
