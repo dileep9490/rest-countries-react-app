@@ -18,7 +18,7 @@ const CountriesView = ({ countiresData }) => {
 						/>
 						{/* container */}
 						<div className="pb-8 pt-6 px-4">
-							<h1 className="pb-4 font-bold">{country.name.official}</h1>
+							<h1 className="pb-4 font-bold">{country.name.common}</h1>
 							<p>
 								<span className="font-semibold">Population:</span>{" "}
 								{country.population}

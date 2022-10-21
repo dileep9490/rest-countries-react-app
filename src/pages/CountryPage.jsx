@@ -39,7 +39,7 @@ const CountryPage = () => {
 						/>
 						<div className="flex flex-col md:pl-28">
 							<h1 className="font-bold text-xl mt-6 mb-6">
-								{data.name?.official}{" "}
+								{data.name?.common}
 							</h1>
 							<p className="mb-1">
 								<span className="font-semibold"> Population :</span>{" "}

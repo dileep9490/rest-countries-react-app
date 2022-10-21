@@ -42,7 +42,7 @@ const HomePage = () => {
 				copy.filter((item) => {
 					if (item !== "") {
 						name = name.charAt(0).toUpperCase() + name.slice(1);
-						return item.name.official.includes(`${name}`);
+						return item.name.common.includes(`${name}`);
 					}
 					return copy;
 				})
@@ -159,11 +159,7 @@ const HomePage = () => {
 			</div>
 			<div className="h-[628px] bg-very-light-grey-l">
 				{/* body */}
-				{loading ? (
-					<Loading/>
-				) : (
-					<CountriesView countiresData={data} />
-				)}
+				{loading ? <Loading /> : <CountriesView countiresData={data} />}
 			</div>
 		</div>
 	);
