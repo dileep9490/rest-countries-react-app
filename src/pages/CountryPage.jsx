@@ -19,7 +19,7 @@ const CountryPage = () => {
 	}, []);
 
 	return (
-		<div className="h-[628px] bg-very-light-grey-l">
+		<div>
 			{isLoading ? (
 				<Loading />
 			) : (
