@@ -10,7 +10,7 @@ function App() {
 			<BrowserRouter>
 				<Routes>
 					<Route path="/" element={<HomePage />} />
-					<Route path="/country" element={<CountryPage />} />
+					<Route path="/country/:countrycode" element={<CountryPage />} />
 				</Routes>
 			</BrowserRouter>
 		</>
